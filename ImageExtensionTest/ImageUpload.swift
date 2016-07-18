@@ -253,11 +253,15 @@ extension UIImageView {
         }
         
         self.status = .WillFailed
-        let image = self.uploadImage!
         CATransaction.begin()
         CATransaction.setCompletionBlock {
             self.lastProgress = (self.lastProgress <= 1.0) ? self.lastProgress : 1.0
-            self.uploadImage(image, progress:0.0)
+            
+            if let i = self.uploadImage {
+                self.uploadImage(i, progress:0.0)
+            } else {
+                print("Not set Upload Image")
+            }
         }
         self.sectorLayer.frame = CGRectInset(self.bounds, 10, 10)
         let radius = CGRectGetWidth(sectorLayer.frame)/2
@@ -272,9 +276,12 @@ extension UIImageView {
             return
         }
         
-        let image = self.uploadImage!
-        self.status = .WillCompleted
-        self.uploadImage(image, progress:1.0)
+        if let i = self.uploadImage {
+            self.status = .WillCompleted
+            self.uploadImage(i, progress:1.0)
+        } else {
+            print("not set Upload Image")
+        }
     }
     
     private func generateMask(progress:Float) -> CAShapeLayer {
