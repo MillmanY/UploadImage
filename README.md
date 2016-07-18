@@ -1,8 +1,7 @@
 # UploadImage
 
-    
 1.Set progress and image
-  self.imgView.uploadImage(UIImage.init(named: "app_icon_60")!, progress: progress)
+self.imgView.uploadImage(UIImage.init(named: "app_icon_60")!, progress: progress)
   
 2.set Upload completed With function
         self.imgView.uploadCompleted()
