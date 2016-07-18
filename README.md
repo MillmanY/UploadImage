@@ -16,11 +16,18 @@ It's a Extension helper for UIImageView to Upload a image when post to server
 4.Upload Completed block
 
   self.imgView.completedBlock = {
+  
         print("Upload Finish")
+  
   }
+  
 5.Upload Failed block
+
   self.imgView.failBlock = {
+  
       print("Upload Fail")
+  
   }
+  
 ![circledemo](https://github.com/MillmanY/UploadImage/blob/master/screen.gif)
 
