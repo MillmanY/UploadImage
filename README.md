@@ -5,11 +5,11 @@ It's a Extension helper for UIImageView to Upload a image when post to server
 
     self.imgView.uploadImage(UIImage.init(named: "app_icon_60")!, progress: progress)
   
-2.set Upload completed With function
+2.Set Upload completed With function
 
     self.imgView.uploadCompleted()
   
-3.set Upload failed with function
+3.Set Upload failed with function
 
     self.imgView.uploadImageFail()
         
