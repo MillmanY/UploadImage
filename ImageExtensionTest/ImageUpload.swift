@@ -186,7 +186,6 @@ extension UIImageView {
             self.sectorLayer.mask?.frame = self.bounds
             self.sectorLayer.mask?.cornerRadius = radius
             self.backgroundLayer.hidden = true
-            self.sectorLayer.hidden = true
 
             if let c = completedBlock {
                 c()
