@@ -107,7 +107,8 @@ extension UIImageView {
                 return layer
             } else {
                 let layer = CAShapeLayer()
-                self.layer.addSublayer(layer)
+                self.layer.insertSublayer(layer, below: sectorLayer)
+//                self.layer.addSublayer(layer)
                 layer.frame = self.bounds
                 layer.cornerRadius = CGRectGetWidth(self.bounds)/2
                 layer.masksToBounds = true
@@ -229,6 +230,7 @@ extension UIImageView {
             self.sectorLayer.masksToBounds = true
             self.sectorLayer.strokeEnd = CGFloat(progress)
             self.sectorLayer.mask = self.generateMask(progress)
+        
             let animation = CABasicAnimation(keyPath: "strokeEnd")
             animation.delegate = self
             animation.fromValue = self.lastProgress
