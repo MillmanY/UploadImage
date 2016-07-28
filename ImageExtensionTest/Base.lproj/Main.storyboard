@@ -66,10 +66,23 @@
                                     <action selector="autoAddAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="qPG-iB-ALb"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0QU-zO-mb3">
+                                <rect key="frame" x="218" y="357" width="164" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="2T1-sX-llj"/>
+                                    <constraint firstAttribute="width" constant="164" id="RA2-Pj-M6n"/>
+                                </constraints>
+                                <state key="normal" title="Select New Picture"/>
+                                <connections>
+                                    <action selector="selectImageAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="aHO-nn-fII"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="ctR-Zw-ild" secondAttribute="trailing" id="18Q-Jq-Xgj"/>
+                            <constraint firstItem="0QU-zO-mb3" firstAttribute="top" secondItem="bNt-38-NJv" secondAttribute="bottom" constant="18" id="3hg-6M-s3R"/>
+                            <constraint firstItem="0QU-zO-mb3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BUr-7p-NPb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NK3-Ix-EIX" secondAttribute="trailing" id="EFc-73-CIl"/>
                             <constraint firstAttribute="leadingMargin" secondItem="ctR-Zw-ild" secondAttribute="leading" id="GcG-j4-3FZ"/>
                             <constraint firstItem="Z3f-Eo-CwP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JMA-BE-Cer"/>

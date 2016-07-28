@@ -8,9 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     @IBOutlet weak var imgView:UIImageView!
     var progress:Float =  0.0
+    lazy var selectImage:UIImage = {
+        let img = UIImage.init(named: "app_icon_60")!
+        return img
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,7 +32,7 @@ class ViewController: UIViewController {
     }
     
     func reset() {
-        self.imgView.uploadImage(UIImage.init(named: "app_icon_60")!, progress: progress)
+        self.imgView.uploadImage(selectImage, progress: progress)
         if(progress <= 1.0) {
             self.performSelector("reset", withObject: nil, afterDelay: 0.3)
         }
@@ -54,11 +58,34 @@ class ViewController: UIViewController {
     
     @IBAction func addAction() {
         progress = (progress + 0.14 <= 1.0) ? progress + 0.14 : 1.0
-        self.imgView.uploadImage(UIImage.init(named: "app_icon_60")!, progress: progress)
+        self.imgView.uploadImage(selectImage, progress: progress)
     }
     
     @IBAction func completedAction () {
         self.imgView.uploadCompleted()
+    }
+
+    
+    @IBAction func selectImageAction () {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = .PhotoLibrary
+  
+        picker.videoQuality = .TypeLow;
+        
+        self.presentViewController(picker, animated: true, completion: nil)
+
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if  let img = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.progress = 0.1
+            self.selectImage = img
+            self.imgView.uploadImage(selectImage, progress: progress)
+
+        }
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

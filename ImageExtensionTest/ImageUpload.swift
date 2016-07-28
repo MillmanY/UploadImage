@@ -180,11 +180,14 @@ extension UIImageView {
             self.status = .Completed
             self.image =  self.uploadImage
             let radius = CGRectGetWidth(self.bounds)/2
+            self.sectorLayer.hidden = true
             self.sectorLayer.frame = self.bounds
             self.sectorLayer.cornerRadius = radius
             self.sectorLayer.mask?.frame = self.bounds
             self.sectorLayer.mask?.cornerRadius = radius
             self.backgroundLayer.hidden = true
+            self.sectorLayer.hidden = true
+
             if let c = completedBlock {
                 c()
             }
@@ -217,10 +220,9 @@ extension UIImageView {
         }
         
         dispatch_async(dispatch_get_main_queue()) {
-            
             self.backgroundLayer.hidden = (progress > 0.0) ? false : true
             self.backgroundLayer.frame = self.bounds
-
+            self.sectorLayer.hidden = false
             self.sectorLayer.contents = image.CGImage
             self.sectorLayer.frame = CGRectInset(self.bounds, 10, 10)
             let radius = CGRectGetWidth(self.sectorLayer.frame)/2
