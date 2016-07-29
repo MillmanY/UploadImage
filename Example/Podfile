@@ -1,0 +1,5 @@
+use_frameworks!
+
+target 'MMUploadImage_Example' do
+  pod 'MMUploadImage', :path => '../'
+end

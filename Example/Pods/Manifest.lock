@@ -1,0 +1,14 @@
+PODS:
+  - MMUploadImage (0.1.0)
+
+DEPENDENCIES:
+  - MMUploadImage (from `../`)
+
+EXTERNAL SOURCES:
+  MMUploadImage:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MMUploadImage: a2d530ef2520513ced7c1989ba6973a882b1b0c9
+
+COCOAPODS: 0.39.0

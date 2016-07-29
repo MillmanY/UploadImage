@@ -1,0 +1,6 @@
+framework module MMUploadImage {
+  umbrella header "MMUploadImage-umbrella.h"
+
+  export *
+  module * { export * }
+}
