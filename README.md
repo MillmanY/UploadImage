@@ -11,6 +11,35 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+# UploadImage
+It's a Extension helper for UIImageView to Upload a image when post to server
+
+1.Set progress and image
+
+    self.imgView.uploadImage(UIImage.init(named: "app_icon_60")!, progress: progress)
+  
+2.Set Upload completed With function
+
+    self.imgView.uploadCompleted()
+  
+3.Set Upload failed with function
+
+    self.imgView.uploadImageFail()
+        
+4.Upload Completed block
+
+    self.imgView.completedBlock = {
+        print("Upload Finish")
+    }
+  
+5.Upload Failed block
+
+    self.imgView.failBlock = {
+      print("Upload Fail")
+    }
+  
+![circledemo](https://github.com/MillmanY/UploadImage/blob/master/screen.gif)
+
 ## Installation
 
 MMUploadImage is available through [CocoaPods](http://cocoapods.org). To install
