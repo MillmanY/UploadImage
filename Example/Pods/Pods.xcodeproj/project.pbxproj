@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		717611843141DAB61F5B58A4DE74E24D /* Pods-MMUploadImage_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BD20BAA2510222643C237D46A8411C /* Pods-MMUploadImage_Example-dummy.m */; };
 		9464217081274DCBA7E4EF20F28BD1DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		B0F88230A8EE50EB9C0365ACFE817CEF /* MMUploadImage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 900FFBD6CFF84CEC38625ADD621D84A2 /* MMUploadImage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C824D869ADAFE294A3E12EB340527D9C /* MMUploadImage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C14D7A56DCDD32EE64C3307345EA081 /* MMUploadImage-dummy.m */; };
 		C9B599FABAD888C5544EDF9E01F2707B /* MMImageUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066280FA63A638971381EAB9A7C2517F /* MMImageUpload.swift */; };
-		D1B4B12264B1D1889F8B3640A01808E7 /* Pods-MMUploadImage_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 849C36E4EE09D4DF014BD1139C8C843B /* Pods-MMUploadImage_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F6D86F84D061BCB10C1F473A1D131090 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,26 +26,16 @@
 
 /* Begin PBXFileReference section */
 		066280FA63A638971381EAB9A7C2517F /* MMImageUpload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MMImageUpload.swift; sourceTree = "<group>"; };
-		237F9C681513A0A580C85B9BBE6DD926 /* Pods-MMUploadImage_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MMUploadImage_Example.release.xcconfig"; sourceTree = "<group>"; };
-		36D490A7386BFB404C9229E2D65AFA55 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		378ED644FA44BD2D76059F7217B8449E /* MMUploadImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMUploadImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3BC50D65ACA0DCB4CABD21496F6C1EFF /* Pods-MMUploadImage_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MMUploadImage_Example-frameworks.sh"; sourceTree = "<group>"; };
 		3C14D7A56DCDD32EE64C3307345EA081 /* MMUploadImage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MMUploadImage-dummy.m"; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		7AEA6F025AF1B6608707805013942EB4 /* MMUploadImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMUploadImage-prefix.pch"; sourceTree = "<group>"; };
-		7DC4F75CD54915E4B9C005DEB8B534C8 /* Pods-MMUploadImage_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MMUploadImage_Example-resources.sh"; sourceTree = "<group>"; };
-		849C36E4EE09D4DF014BD1139C8C843B /* Pods-MMUploadImage_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MMUploadImage_Example-umbrella.h"; sourceTree = "<group>"; };
 		8831952DC3A9B37C8A11A3349A298077 /* MMUploadImage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MMUploadImage.modulemap; sourceTree = "<group>"; };
 		8AA2105B777A49ECBA03A54DD9E892C9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		900FFBD6CFF84CEC38625ADD621D84A2 /* MMUploadImage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MMUploadImage-umbrella.h"; sourceTree = "<group>"; };
-		914B7C84064AB60AAE882A21AB067A48 /* Pods-MMUploadImage_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MMUploadImage_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9F7702F7086E7710B572CDF4CB43C732 /* Pods_MMUploadImage_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MMUploadImage_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A37E7B75D33D39E23403E669E31E635F /* Pods-MMUploadImage_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MMUploadImage_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		B7B4FFFC2573A324606EE5D3E3456EAB /* Pods-MMUploadImage_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MMUploadImage_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BD7D3F974C9485348A56176F0F467B76 /* MMUploadImage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MMUploadImage.xcconfig; sourceTree = "<group>"; };
-		F5BD20BAA2510222643C237D46A8411C /* Pods-MMUploadImage_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MMUploadImage_Example-dummy.m"; sourceTree = "<group>"; };
-		FD134F61630CCB68AEBB40F404A82C03 /* Pods-MMUploadImage_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-MMUploadImage_Example.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,16 +87,7 @@
 				BA9400C62483075526EF2D5E4E134E87 /* Development Pods */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
 				E2E055480E5D76B2F55068594AC5A70F /* Products */,
-				9061C4E26285A1DC049FA8D70778797A /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		9061C4E26285A1DC049FA8D70778797A /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				E0D5D3379BC982147C4C5C991B0D1809 /* Pods-MMUploadImage_Example */,
-			);
-			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		BA9400C62483075526EF2D5E4E134E87 /* Development Pods */ = {
@@ -141,24 +120,6 @@
 				066280FA63A638971381EAB9A7C2517F /* MMImageUpload.swift */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		E0D5D3379BC982147C4C5C991B0D1809 /* Pods-MMUploadImage_Example */ = {
-			isa = PBXGroup;
-			children = (
-				36D490A7386BFB404C9229E2D65AFA55 /* Info.plist */,
-				FD134F61630CCB68AEBB40F404A82C03 /* Pods-MMUploadImage_Example.modulemap */,
-				A37E7B75D33D39E23403E669E31E635F /* Pods-MMUploadImage_Example-acknowledgements.markdown */,
-				B7B4FFFC2573A324606EE5D3E3456EAB /* Pods-MMUploadImage_Example-acknowledgements.plist */,
-				F5BD20BAA2510222643C237D46A8411C /* Pods-MMUploadImage_Example-dummy.m */,
-				3BC50D65ACA0DCB4CABD21496F6C1EFF /* Pods-MMUploadImage_Example-frameworks.sh */,
-				7DC4F75CD54915E4B9C005DEB8B534C8 /* Pods-MMUploadImage_Example-resources.sh */,
-				849C36E4EE09D4DF014BD1139C8C843B /* Pods-MMUploadImage_Example-umbrella.h */,
-				914B7C84064AB60AAE882A21AB067A48 /* Pods-MMUploadImage_Example.debug.xcconfig */,
-				237F9C681513A0A580C85B9BBE6DD926 /* Pods-MMUploadImage_Example.release.xcconfig */,
-			);
-			name = "Pods-MMUploadImage_Example";
-			path = "Target Support Files/Pods-MMUploadImage_Example";
 			sourceTree = "<group>";
 		};
 		E2E055480E5D76B2F55068594AC5A70F /* Products */ = {
@@ -195,7 +156,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1B4B12264B1D1889F8B3640A01808E7 /* Pods-MMUploadImage_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +205,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0800;
+				TargetAttributes = {
+					01F9E237D63E8AD9805DFF49C9EF7E94 = {
+						LastSwiftMigration = 0800;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -269,7 +234,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				717611843141DAB61F5B58A4DE74E24D /* Pods-MMUploadImage_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +296,6 @@
 		};
 		134E88DEEF515A934A922DF7D1A7C0D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 914B7C84064AB60AAE882A21AB067A48 /* Pods-MMUploadImage_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -428,6 +391,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -457,6 +421,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -465,7 +430,6 @@
 		};
 		C8E6B6DCEB172644BF494E4A74A0627B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 237F9C681513A0A580C85B9BBE6DD926 /* Pods-MMUploadImage_Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
