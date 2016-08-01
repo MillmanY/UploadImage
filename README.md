@@ -35,8 +35,17 @@ It's a Extension helper for UIImageView to Upload a image when post to server
     self.imgView.failBlock = {
       print("Upload Fail")
     }
-  
-![circledemo](https://github.com/MillmanY/UploadImage/blob/master/screen.gif)
+6.Set Progress Style
+
+    public enum LoadingStyle {
+     case Sector
+     case CenterExpand
+     case CenterShrink
+    }
+    
+    imgView.style = .Sector
+
+![circledemo](https://github.com/MillmanY/UploadImage/blob/master/midscreen.gif)
 
 ## Installation
 
