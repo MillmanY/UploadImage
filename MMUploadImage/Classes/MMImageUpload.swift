@@ -345,7 +345,7 @@ extension UIImageView {
     }
     
     private func animationToValue(progress:Float) -> AnyObject? {
-        var progressValue = (self.status == .Failed) ? 0 : (progress <= 1.0) ? progress : 1.0
+        let progressValue = (self.status == .Failed) ? 0 : (progress <= 1.0) ? progress : 1.0
         switch self.style {
         case .Sector,.CenterExpand:
             return progressValue
