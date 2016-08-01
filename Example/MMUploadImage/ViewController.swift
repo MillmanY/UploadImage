@@ -10,6 +10,7 @@ import UIKit
 import MMUploadImage
 class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     @IBOutlet weak var imgView:UIImageView!
+    @IBOutlet weak var seg:UISegmentedControl!
     var progress:Float =  0.0
     lazy var selectImage:UIImage = {
         let img = UIImage.init(named: "app_icon_60")!
@@ -17,11 +18,9 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        seg.selectedSegmentIndex = 0
         
-//        self.imgView.uploadImage(UIImage.init(named: "app_icon_60")!, progress: 0.4)
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        
+        imgView.style = .CenterShrink
         self.imgView.completedBlock = {
             print("Upload Finish")
         }
@@ -71,11 +70,22 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = .PhotoLibrary
-  
         picker.videoQuality = .TypeLow;
-        
         self.presentViewController(picker, animated: true, completion: nil)
-
+    }
+    
+    @IBAction func segmentAction(segment:UISegmentedControl) {
+        progress = 0.0
+        self.imgView.uploadImageFail()
+        switch segment.selectedSegmentIndex {
+        case 0:
+            imgView.style = .Sector
+        case 1:
+            imgView.style = .CenterExpand
+        case 2:
+            imgView.style = .CenterShrink
+        default:break
+        }
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -87,7 +97,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

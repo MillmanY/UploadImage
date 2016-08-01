@@ -26,6 +26,8 @@ public enum UploadStatus {
 
 public enum LoadingStyle {
     case Sector
+    case CenterExpand
+    case CenterShrink
 }
 
 private var SECTORLAYER   = "SectorKey"
@@ -39,18 +41,38 @@ private var AutoCompleted = "AutoCompletedKey"
 private var CompletedBlock = "CompletedKey"
 private var FailBlock = "FailKey"
 private var UploadKey = "UploadKey"
+private var StyleKey  = "StyleKey"
+
+// Var
 public extension UIImageView {
+    var style:LoadingStyle {
+        get {
+            if let current = objc_getAssociatedObject(self,
+                                                      &StyleKey) as? Associated<LoadingStyle> {
+                return current.value
+            } else {
+                return .Sector
+            }
+            
+        }
+        set {
+            objc_setAssociatedObject(self,
+                                     &StyleKey,
+                                     Associated<LoadingStyle>(newValue),
+                                     .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
     
     var status:UploadStatus {
         get {
             
             if let current = objc_getAssociatedObject(self,
-            &UploadKey) as? Associated<UploadStatus> {
+                                                      &UploadKey) as? Associated<UploadStatus> {
                 return current.value
             } else {
                 return .None
             }
-          
+            
         }
         set {
             objc_setAssociatedObject(self,
@@ -135,6 +157,7 @@ public extension UIImageView {
                 self.clipsToBounds = true
                 self.sectorLayer = CAShapeLayer()
                 self.layer.addSublayer(self.sectorLayer)
+                self.style = .Sector
                 return self.sectorLayer
             }
         }
@@ -174,6 +197,9 @@ public extension UIImageView {
             return false
         }
     }
+}
+
+public extension UIImageView {
     
     public override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         
@@ -225,27 +251,11 @@ public extension UIImageView {
             self.backgroundLayer.hidden = (progress > 0.0) ? false : true
             self.backgroundLayer.frame = self.bounds
             self.sectorLayer.contents = image.CGImage
-            self.sectorLayer.frame = CGRectInset(self.bounds, 10, 10)
+            self.sectorLayer.frame = self.layerFrame()
             let radius = CGRectGetWidth(self.sectorLayer.frame)/2
             self.sectorLayer.cornerRadius = radius
             self.sectorLayer.masksToBounds = true
-            self.sectorLayer.mask = self.generateMask(progress)
-        
-            let animation = CABasicAnimation(keyPath: "strokeEnd")
-            animation.delegate = self
-            animation.fromValue = self.lastProgress
-            
-            if self.status == .Failed {
-                animation.toValue = 0
-            } else {
-                animation.toValue = (progress <= 1.0) ? progress : 1.0
-            }
-            
-            animation.duration = 0.3
-            animation.removedOnCompletion = false
-            animation.setValue("StrokeProgress", forKey: "animationID")
-            self.lastProgress = progress
-            self.sectorLayer.mask!.addAnimation(animation, forKey: "Stroke")
+            self.addAnimationWith(progress)
         }
     }
     
@@ -266,7 +276,7 @@ public extension UIImageView {
                 print("Not set Upload Image")
             }
         }
-        self.sectorLayer.frame = CGRectInset(self.bounds, 10, 10)
+        self.sectorLayer.frame = self.layerFrame()
         let radius = CGRectGetWidth(sectorLayer.frame)/2
         
         self.sectorLayer.cornerRadius = radius
@@ -287,6 +297,64 @@ public extension UIImageView {
         }
     }
     
+    private func layerFrame() -> CGRect {
+        switch self.style {
+        case .Sector:
+            return CGRectInset(self.bounds, 10, 10)
+        default:
+            return self.bounds
+        }
+    }
+}
+
+// Animation
+extension UIImageView {
+    private func addAnimationWith(progress:Float) {
+        
+        let animation = CABasicAnimation()
+        animation.delegate = self
+        animation.duration = 0.3
+        animation.removedOnCompletion = false
+        animation.setValue("StrokeProgress", forKey: "animationID")
+        animation.fromValue = self.animationFromValue()
+        animation.toValue = self.animationToValue(progress)
+        switch self.style {
+            case .Sector:
+                animation.keyPath = "strokeEnd"
+                self.sectorLayer.mask = self.generateMask(progress)
+            case .CenterExpand:
+                animation.keyPath = "transform.scale"
+                self.sectorLayer.mask = self.generateMask(progress)
+            case .CenterShrink:
+                animation.keyPath = "lineWidth"
+        }
+        animation.fillMode = kCAFillModeBoth
+        self.sectorLayer.mask = self.generateMask(progress)
+        self.sectorLayer.mask!.addAnimation(animation, forKey: "Stroke")
+        self.lastProgress = progress
+    }
+    
+    private func animationFromValue() -> AnyObject? {
+        switch self.style {
+        case .Sector,.CenterExpand:
+            return self.lastProgress
+        case .CenterShrink:
+            let radius = CGRectGetWidth(sectorLayer.frame)/2
+            return self.lastProgress * Float(radius*2)
+        }
+    }
+    
+    private func animationToValue(progress:Float) -> AnyObject? {
+        var progressValue = (self.status == .Failed) ? 0 : (progress <= 1.0) ? progress : 1.0
+        switch self.style {
+        case .Sector,.CenterExpand:
+            return progressValue
+        case .CenterShrink:
+            let radius = CGRectGetWidth(sectorLayer.frame)/2
+             return progressValue * Float(radius*2)
+        }
+    }
+    
     private func generateMask(progress:Float) -> CAShapeLayer {
         let radius = CGRectGetWidth(sectorLayer.frame)/2
         let bezier = UIBezierPath(roundedRect: sectorLayer.bounds, cornerRadius:radius)
@@ -294,13 +362,36 @@ public extension UIImageView {
         maskLayer.frame = sectorLayer.bounds
         maskLayer.cornerRadius = radius
         maskLayer.path = bezier.CGPath
-        maskLayer.strokeColor = UIColor.blueColor().CGColor
+        maskLayer.strokeColor = self.maskStrokeColor()
         maskLayer.lineWidth = radius*2
-        maskLayer.strokeEnd = CGFloat(progress)
-        maskLayer.fillColor = UIColor.clearColor().CGColor
+        if self.style != .CenterShrink {
+            maskLayer.strokeEnd = CGFloat(progress)
+        }
+        maskLayer.fillColor =  self.maskFillColor()
         maskLayer.masksToBounds = true
-        
         return maskLayer
+    }
+    
+    private func maskStrokeColor () -> CGColor {
+        switch self.style {
+            case .Sector:
+                return UIColor.blueColor().CGColor
+            case .CenterExpand:
+                return UIColor.clearColor().CGColor
+            case .CenterShrink:
+                return UIColor.blueColor().CGColor
+        }
+    }
+    
+    private func maskFillColor () -> CGColor {
+        switch self.style {
+            case .Sector:
+                return UIColor.clearColor().CGColor
+            case .CenterExpand:
+                return UIColor.blueColor().CGColor
+            case .CenterShrink:
+                return UIColor.clearColor().CGColor
+        }
     }
 }
 

@@ -77,15 +77,38 @@
                                     <action selector="selectImageAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="aHO-nn-fII"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3V4-Ll-IX2">
+                                <rect key="frame" x="150.5" y="395" width="300" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="BfD-6T-CqK"/>
+                                    <constraint firstAttribute="width" constant="303" id="bSk-qq-xbP"/>
+                                    <constraint firstAttribute="width" constant="300" id="h4O-FA-yhy"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Sector"/>
+                                    <segment title="CenterExpand"/>
+                                    <segment title="CenterShrink"/>
+                                </segments>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="bSk-qq-xbP"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="segmentAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="gjC-LQ-lIC"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="ctR-Zw-ild" secondAttribute="trailing" id="18Q-Jq-Xgj"/>
                             <constraint firstItem="0QU-zO-mb3" firstAttribute="top" secondItem="bNt-38-NJv" secondAttribute="bottom" constant="18" id="3hg-6M-s3R"/>
+                            <constraint firstItem="3V4-Ll-IX2" firstAttribute="top" secondItem="0QU-zO-mb3" secondAttribute="bottom" constant="8" id="5cG-8X-yxG"/>
                             <constraint firstItem="0QU-zO-mb3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BUr-7p-NPb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NK3-Ix-EIX" secondAttribute="trailing" id="EFc-73-CIl"/>
                             <constraint firstAttribute="leadingMargin" secondItem="ctR-Zw-ild" secondAttribute="leading" id="GcG-j4-3FZ"/>
                             <constraint firstItem="Z3f-Eo-CwP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JMA-BE-Cer"/>
+                            <constraint firstItem="3V4-Ll-IX2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MeT-90-uyf"/>
                             <constraint firstItem="bNt-38-NJv" firstAttribute="top" secondItem="ctR-Zw-ild" secondAttribute="bottom" constant="14" id="N1p-2G-LnN"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Pnt-np-55q" secondAttribute="leading" id="NH5-zG-LqZ"/>
                             <constraint firstItem="Z3f-Eo-CwP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="18" id="Q9m-E8-Eav"/>
@@ -100,6 +123,7 @@
                     </view>
                     <connections>
                         <outlet property="imgView" destination="Z3f-Eo-CwP" id="Ae1-aI-gd6"/>
+                        <outlet property="seg" destination="3V4-Ll-IX2" id="qXv-lH-iC5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
