@@ -78,7 +78,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3V4-Ll-IX2">
-                                <rect key="frame" x="150.5" y="395" width="300" height="29"/>
+                                <rect key="frame" x="150.5" y="427" width="300" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="BfD-6T-CqK"/>
                                     <constraint firstAttribute="width" constant="303" id="bSk-qq-xbP"/>
@@ -98,12 +98,21 @@
                                     <action selector="segmentAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="gjC-LQ-lIC"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Loading Style:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6MP-Tx-6Gq">
+                                <rect key="frame" x="243" y="395" width="109" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="104" id="xV9-wL-dDy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="ctR-Zw-ild" secondAttribute="trailing" id="18Q-Jq-Xgj"/>
                             <constraint firstItem="0QU-zO-mb3" firstAttribute="top" secondItem="bNt-38-NJv" secondAttribute="bottom" constant="18" id="3hg-6M-s3R"/>
-                            <constraint firstItem="3V4-Ll-IX2" firstAttribute="top" secondItem="0QU-zO-mb3" secondAttribute="bottom" constant="8" id="5cG-8X-yxG"/>
+                            <constraint firstItem="3V4-Ll-IX2" firstAttribute="top" secondItem="0QU-zO-mb3" secondAttribute="bottom" constant="40" id="5cG-8X-yxG"/>
                             <constraint firstItem="0QU-zO-mb3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BUr-7p-NPb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NK3-Ix-EIX" secondAttribute="trailing" id="EFc-73-CIl"/>
                             <constraint firstAttribute="leadingMargin" secondItem="ctR-Zw-ild" secondAttribute="leading" id="GcG-j4-3FZ"/>
@@ -111,15 +120,23 @@
                             <constraint firstItem="3V4-Ll-IX2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MeT-90-uyf"/>
                             <constraint firstItem="bNt-38-NJv" firstAttribute="top" secondItem="ctR-Zw-ild" secondAttribute="bottom" constant="14" id="N1p-2G-LnN"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Pnt-np-55q" secondAttribute="leading" id="NH5-zG-LqZ"/>
+                            <constraint firstItem="6MP-Tx-6Gq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PER-Pu-qEJ"/>
                             <constraint firstItem="Z3f-Eo-CwP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="18" id="Q9m-E8-Eav"/>
                             <constraint firstItem="NK3-Ix-EIX" firstAttribute="top" secondItem="Z3f-Eo-CwP" secondAttribute="bottom" constant="36" id="YLi-Yi-YNg"/>
+                            <constraint firstItem="6MP-Tx-6Gq" firstAttribute="top" secondItem="0QU-zO-mb3" secondAttribute="bottom" constant="8" id="c2C-Pd-h3y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Pnt-np-55q" secondAttribute="trailing" id="cGa-7P-7yQ"/>
                             <constraint firstAttribute="leadingMargin" secondItem="bNt-38-NJv" secondAttribute="leading" id="e7d-Fp-EJS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bNt-38-NJv" secondAttribute="trailing" id="klb-SI-Jva"/>
+                            <constraint firstItem="3V4-Ll-IX2" firstAttribute="top" secondItem="6MP-Tx-6Gq" secondAttribute="bottom" constant="11" id="lu0-mS-hyD"/>
                             <constraint firstAttribute="leadingMargin" secondItem="NK3-Ix-EIX" secondAttribute="leading" id="mq0-Mj-IIO"/>
                             <constraint firstItem="Pnt-np-55q" firstAttribute="top" secondItem="NK3-Ix-EIX" secondAttribute="bottom" constant="16" id="sGp-Bw-wMt"/>
                             <constraint firstItem="ctR-Zw-ild" firstAttribute="top" secondItem="Pnt-np-55q" secondAttribute="bottom" constant="15" id="wVC-gy-Ubq"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5cG-8X-yxG"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="imgView" destination="Z3f-Eo-CwP" id="Ae1-aI-gd6"/>
