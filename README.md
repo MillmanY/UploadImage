@@ -10,15 +10,15 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
-It's a Extension helper for UIImageView to Upload a image when post to server
+It's an Extension helper for UIImageView to Upload a image when post to server
 
 1.Set progress and image
 
-    self.imgView.uploadImage(UIImage.init(named: "app_icon_60")!, progress: progress)
+    imgView.uploadImage(UIImage.init(named: "app_icon_60")!, progress: progress)
   
 2.Set Upload completed With function
 
-    self.imgView.uploadCompleted()
+    imgView.uploadCompleted()
   
 3.Set Upload failed with function
 
@@ -26,13 +26,13 @@ It's a Extension helper for UIImageView to Upload a image when post to server
         
 4.Upload Completed block
 
-    self.imgView.completedBlock = {
+    imgView.completedBlock = {
         print("Upload Finish")
     }
   
 5.Upload Failed block
 
-    self.imgView.failBlock = {
+    imgView.failBlock = {
       print("Upload Fail")
     }
 6.Set Progress Style
@@ -53,7 +53,7 @@ MMUploadImage is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "MMUploadImage"
+pod 'MMUploadImage'
 ```
 
 ## Author
