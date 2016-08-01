@@ -15,6 +15,18 @@ public final class Associated<T>: NSObject {
     }
 }
 
+public enum UploadStatus {
+    case None
+    case Uploading
+    case WillFailed
+    case Failed
+    case WillCompleted
+    case Completed
+}
+
+public enum LoadingStyle {
+    case Sector
+}
 
 private var SECTORLAYER   = "SectorKey"
 private var MaskLayer = "MaskKey"
@@ -28,15 +40,6 @@ private var CompletedBlock = "CompletedKey"
 private var FailBlock = "FailKey"
 private var UploadKey = "UploadKey"
 public extension UIImageView {
-    
-    enum UploadStatus {
-        case None
-        case Uploading
-        case WillFailed
-        case Failed
-        case WillCompleted
-        case Completed
-    }
     
     var status:UploadStatus {
         get {
@@ -109,7 +112,6 @@ public extension UIImageView {
             } else {
                 let layer = CAShapeLayer()
                 self.layer.insertSublayer(layer, below: sectorLayer)
-//                self.layer.addSublayer(layer)
                 layer.frame = self.bounds
                 layer.cornerRadius = CGRectGetWidth(self.bounds)/2
                 layer.masksToBounds = true
@@ -120,6 +122,7 @@ public extension UIImageView {
             }
         }
     }
+    
     private var sectorLayer:CAShapeLayer {
         set {
             objc_setAssociatedObject(self, &SECTORLAYER, newValue, .OBJC_ASSOCIATION_RETAIN)
@@ -221,13 +224,11 @@ public extension UIImageView {
         dispatch_async(dispatch_get_main_queue()) {
             self.backgroundLayer.hidden = (progress > 0.0) ? false : true
             self.backgroundLayer.frame = self.bounds
-//            self.sectorLayer.hidden = false
             self.sectorLayer.contents = image.CGImage
             self.sectorLayer.frame = CGRectInset(self.bounds, 10, 10)
             let radius = CGRectGetWidth(self.sectorLayer.frame)/2
             self.sectorLayer.cornerRadius = radius
             self.sectorLayer.masksToBounds = true
-            self.sectorLayer.strokeEnd = CGFloat(progress)
             self.sectorLayer.mask = self.generateMask(progress)
         
             let animation = CABasicAnimation(keyPath: "strokeEnd")
@@ -298,6 +299,8 @@ public extension UIImageView {
         maskLayer.strokeEnd = CGFloat(progress)
         maskLayer.fillColor = UIColor.clearColor().CGColor
         maskLayer.masksToBounds = true
+        
         return maskLayer
     }
 }
+
