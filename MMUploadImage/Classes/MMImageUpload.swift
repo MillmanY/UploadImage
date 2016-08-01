@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 public final class Associated<T>: NSObject {
     public typealias `Type` = T
     public let value: Type
