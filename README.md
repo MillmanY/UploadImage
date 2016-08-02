@@ -44,13 +44,7 @@ It's an Extension helper for UIImageView to Upload a image when post to server
     }
     
     imgView.style = .Sector
-7.Get progress value by
 
-    imgView.valueChangeBlock = { (value) in
-         print("Value Change \(value)")
-    }
-    or
-    print("\(imgView.currentProgress)")
 ![circledemo](https://github.com/MillmanY/UploadImage/blob/master/midscreen.gif)
 
 ## Installation
