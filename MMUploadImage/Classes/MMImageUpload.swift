@@ -30,7 +30,6 @@ public enum LoadingStyle {
     case CenterShrink
 }
 
-
 private var ProgressTimer = "TimerKey"
 private var SECTORLAYER   = "SectorKey"
 private var MaskLayer = "MaskKey"
