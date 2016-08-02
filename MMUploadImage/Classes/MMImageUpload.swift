@@ -29,6 +29,7 @@ public enum LoadingStyle {
     case CenterExpand
     case CenterShrink
 }
+
 private var ProgressBlock = "ProgressBlockKey"
 private var ProgressTimer = "TimerKey"
 private var SECTORLAYER   = "SectorKey"
