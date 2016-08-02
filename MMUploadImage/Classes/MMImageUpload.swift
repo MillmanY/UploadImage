@@ -32,10 +32,7 @@ public enum LoadingStyle {
 
 private var ProgressTimer = "TimerKey"
 private var SECTORLAYER   = "SectorKey"
-private var MaskLayer = "MaskKey"
-private var ProgressAnimate = "AnimateKey"
 private var LastProgress = "ProgressKey"
-private var IsStartAnimate = "StartKey"
 private var BackgroundLayer = "BackgroundLayer"
 private var UploadImage = "ImageKey"
 private var AutoCompleted = "AutoCompletedKey"
