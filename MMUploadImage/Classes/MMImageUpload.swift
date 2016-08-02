@@ -30,7 +30,7 @@ public enum LoadingStyle {
     case CenterShrink
 }
 
-private var ProgressBlock = "ProgressBlockKey"
+
 private var ProgressTimer = "TimerKey"
 private var SECTORLAYER   = "SectorKey"
 private var MaskLayer = "MaskKey"
@@ -48,14 +48,13 @@ private var CurrentProgress = "CurrentProgressKey"
 
 public extension UIImageView {
     
-    var currentProgress:Float {
+    private var currentProgress:Float {
         set {
             // Prevent Reset Value When Fail or Completed
-            if let progress = self.valueChangeBlock where
-                self.status != .Completed && self.status != .Failed  &&
-                   newValue != currentProgress &&
-                    !(currentProgress == 1.0 || currentProgress == 0.0){
-                progress(progress: newValue)
+            if self.status != .Completed &&
+               self.status != .Failed  &&
+               newValue != currentProgress &&
+               !(currentProgress == 1.0 || currentProgress == 0.0){
             }
   
             objc_setAssociatedObject(self, &CurrentProgress, newValue, .OBJC_ASSOCIATION_RETAIN)
@@ -105,28 +104,7 @@ public extension UIImageView {
                                      .OBJC_ASSOCIATION_RETAIN)
         }
     }
-    
-    public var valueChangeBlock:((progress:Float) -> Void)? {
-        get {
-            
-            if((objc_getAssociatedObject(self,
-                &ProgressBlock) as? Associated<((progress:Float) -> Void)>)
-                .map {$0.value} == nil) {
-                return nil
-            }
-            return (objc_getAssociatedObject(self, &ProgressBlock)
-                as? Associated<(progress:Float) -> Void>)
-                .map {$0.value}
-        }
-        set {
-            objc_setAssociatedObject(self,
-                                     &ProgressBlock,
-                                     newValue.map
-                                        { Associated<((progress:Float) -> Void)>($0) },
-                                     .OBJC_ASSOCIATION_RETAIN)
-        }
-    }
-    
+        
     public var completedBlock:(() -> Void)? {
         get {
             
