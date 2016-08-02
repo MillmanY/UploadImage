@@ -408,9 +408,6 @@ extension UIImageView {
         maskLayer.path = bezier.CGPath
         maskLayer.strokeColor = self.maskStrokeColor()
         maskLayer.lineWidth = radius*2
-        if self.style != .CenterShrink {
-            maskLayer.strokeEnd = CGFloat(progress)
-        }
         maskLayer.fillColor =  self.maskFillColor()
         maskLayer.masksToBounds = true
         return maskLayer
