@@ -19,8 +19,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     override func viewDidLoad() {
         super.viewDidLoad()
         seg.selectedSegmentIndex = 0
-        
-        imgView.style = .CenterShrink
+
         self.imgView.completedBlock = {
             print("Upload Finish")
         }

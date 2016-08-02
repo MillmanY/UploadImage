@@ -70,9 +70,9 @@ public extension UIImageView {
                                                       &StyleKey) as? Associated<LoadingStyle> {
                 return current.value
             } else {
+                self.style = .Sector
                 return .Sector
             }
-            
         }
         set {
             objc_setAssociatedObject(self,
@@ -188,7 +188,6 @@ public extension UIImageView {
                 self.clipsToBounds = true
                 self.sectorLayer = CAShapeLayer()
                 self.layer.addSublayer(self.sectorLayer)
-                self.style = .Sector
                 return self.sectorLayer
             }
         }
