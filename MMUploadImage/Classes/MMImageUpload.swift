@@ -53,7 +53,7 @@ public extension UIImageView {
             if self.status != .Completed &&
                self.status != .Failed  &&
                newValue != currentProgress &&
-               !(currentProgress == 1.0 || currentProgress == 0.0){
+                !(currentProgress == 1.0 || currentProgress == 0.0){
             }
   
             objc_setAssociatedObject(self, &CurrentProgress, newValue, .OBJC_ASSOCIATION_RETAIN)
