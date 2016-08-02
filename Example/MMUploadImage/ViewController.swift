@@ -28,6 +28,10 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         self.imgView.failBlock = {
             print("Upload Fail")
         }
+        
+        self.imgView.valueChangeBlock = { (value) in
+            print("Value Change \(value)")
+        }
     }
     
     func reset() {

@@ -29,7 +29,8 @@ public enum LoadingStyle {
     case CenterExpand
     case CenterShrink
 }
-
+private var ProgressBlock = "ProgressBlockKey"
+private var ProgressTimer = "TimerKey"
 private var SECTORLAYER   = "SectorKey"
 private var MaskLayer = "MaskKey"
 private var ProgressAnimate = "AnimateKey"
@@ -42,9 +43,31 @@ private var CompletedBlock = "CompletedKey"
 private var FailBlock = "FailKey"
 private var UploadKey = "UploadKey"
 private var StyleKey  = "StyleKey"
+private var CurrentProgress = "CurrentProgressKey"
 
-// Var
 public extension UIImageView {
+    
+    var currentProgress:Float {
+        set {
+            // Prevent Reset Value When Fail or Completed
+            if let progress = self.valueChangeBlock where
+                self.status != .Completed && self.status != .Failed  &&
+                   newValue != currentProgress &&
+                    !(currentProgress == 1.0 || currentProgress == 0.0){
+                progress(progress: newValue)
+            }
+  
+            objc_setAssociatedObject(self, &CurrentProgress, newValue, .OBJC_ASSOCIATION_RETAIN)
+            
+        } get {
+            if let progress = objc_getAssociatedObject(self, &CurrentProgress) as? Float {
+                return progress
+            } else {
+                return 0.0
+            }
+        }
+    }
+    
     var style:LoadingStyle {
         get {
             if let current = objc_getAssociatedObject(self,
@@ -78,6 +101,27 @@ public extension UIImageView {
             objc_setAssociatedObject(self,
                                      &UploadKey,
                                      Associated<UploadStatus>(newValue),
+                                     .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
+    public var valueChangeBlock:((progress:Float) -> Void)? {
+        get {
+            
+            if((objc_getAssociatedObject(self,
+                &ProgressBlock) as? Associated<((progress:Float) -> Void)>)
+                .map {$0.value} == nil) {
+                return nil
+            }
+            return (objc_getAssociatedObject(self, &ProgressBlock)
+                as? Associated<(progress:Float) -> Void>)
+                .map {$0.value}
+        }
+        set {
+            objc_setAssociatedObject(self,
+                                     &ProgressBlock,
+                                     newValue.map
+                                        { Associated<((progress:Float) -> Void)>($0) },
                                      .OBJC_ASSOCIATION_RETAIN)
         }
     }
@@ -145,10 +189,22 @@ public extension UIImageView {
         }
     }
     
+    private var progressTimer:NSTimer? {
+        set {
+            objc_setAssociatedObject(self, &ProgressTimer, newValue, .OBJC_ASSOCIATION_RETAIN)
+            
+        } get {
+            if let timer = objc_getAssociatedObject(self, &ProgressTimer) as? NSTimer {
+                return timer
+            } else {
+                return nil
+            }
+        }
+    }
+    
     private var sectorLayer:CAShapeLayer {
         set {
             objc_setAssociatedObject(self, &SECTORLAYER, newValue, .OBJC_ASSOCIATION_RETAIN)
-            
         } get {
             if let layer = objc_getAssociatedObject(self, &SECTORLAYER) as? CAShapeLayer {
                 return layer
@@ -163,7 +219,7 @@ public extension UIImageView {
         }
     }
     
-    var lastProgress:Float {
+    private var lastProgress:Float {
         set {
             objc_setAssociatedObject(self, &LastProgress, newValue, .OBJC_ASSOCIATION_RETAIN)
         } get {
@@ -199,9 +255,18 @@ public extension UIImageView {
     }
 }
 
-public extension UIImageView {
+public extension UIImageView  {
+    
+    func animationDoing(timer:NSTimer) {
+        self.currentProgress = animationProgress()
+    }
     
     public override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+        
+        if flag == true {
+            progressTimer?.invalidate()
+            progressTimer = nil
+        }
         
         if lastProgress >= 1.0 && autoCompleted || self.status == .WillCompleted{
             
@@ -223,7 +288,7 @@ public extension UIImageView {
             if !flag {
                 return
             }
-            self.status = .Failed
+            self.status = .None
             if let f = failBlock{
                 f()
             }
@@ -235,6 +300,10 @@ public extension UIImageView {
     }
     
     public override func animationDidStart(anim: CAAnimation) {
+        if progressTimer == nil {
+            progressTimer =  NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(UIImageView.animationDoing(_:)), userInfo: nil, repeats: true)
+        }
+        
         if (self.status != .WillFailed && self.status != .WillCompleted) {
             self.status = .Uploading
         }
@@ -261,7 +330,7 @@ public extension UIImageView {
     
     public func uploadImageFail() {
         
-        if self.status == .Completed {
+        if self.status == .Completed || self.status == .Failed {
             return
         }
         
@@ -273,6 +342,7 @@ public extension UIImageView {
             if let i = self.uploadImage {
                 self.uploadImage(i, progress:0.0)
             } else {
+                self.status = .None
                 print("Not set Upload Image")
             }
         }
@@ -293,6 +363,7 @@ public extension UIImageView {
             self.status = .WillCompleted
             self.uploadImage(i, progress:1.0)
         } else {
+            self.status = .None
             print("not set Upload Image")
         }
     }
@@ -321,10 +392,8 @@ extension UIImageView {
         switch self.style {
             case .Sector:
                 animation.keyPath = "strokeEnd"
-                self.sectorLayer.mask = self.generateMask(progress)
             case .CenterExpand:
                 animation.keyPath = "transform.scale"
-                self.sectorLayer.mask = self.generateMask(progress)
             case .CenterShrink:
                 animation.keyPath = "lineWidth"
         }
@@ -345,7 +414,7 @@ extension UIImageView {
     }
     
     private func animationToValue(progress:Float) -> AnyObject? {
-        let progressValue = (self.status == .Failed) ? 0 : (progress <= 1.0) ? progress : 1.0
+        let progressValue = (self.status == .WillFailed) ? 0 : (progress <= 1.0) ? progress : 1.0
         switch self.style {
         case .Sector,.CenterExpand:
             return progressValue
@@ -393,5 +462,23 @@ extension UIImageView {
                 return UIColor.clearColor().CGColor
         }
     }
+    
+    private func animationProgress () -> Float {
+        var value:CGFloat = 0.0
+        if let layer = self.sectorLayer.mask?.presentationLayer() as? CAShapeLayer {
+            switch self.style {
+            case .Sector:
+                value = layer.strokeEnd
+            case .CenterExpand:
+                value = layer.transform.m22
+            case .CenterShrink:
+                value = layer.lineWidth/100.0
+            }
+            
+            let floatStr = NSString.init(format: "%0.3f", value)
+            return floatStr.floatValue
+        } else {
+            return 0.0
+        }
+    }
 }
-
