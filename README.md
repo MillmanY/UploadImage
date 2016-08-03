@@ -51,7 +51,7 @@ It's an Extension helper for UIImageView to Upload a image when post to server
 
     imgView.style = .RoundWith(lineWdith: 5, lineColor: UIColor.yellowColor())
 
-![circledemo](https://github.com/MillmanY/UploadImage/blob/master/Round.gif)
+![circledemo](https://github.com/MillmanY/UploadImage/blob/master/RoundMid.gif)
 
 
 ## Installation
