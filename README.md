@@ -44,9 +44,15 @@ It's an Extension helper for UIImageView to Upload a image when post to server
      case RoundWith(lineWdith:CGFloat,lineColor:UIColor)
     }
     
+
     imgView.style = .Sector
 
 ![circledemo](https://github.com/MillmanY/UploadImage/blob/master/midscreen.gif)
+
+    imgView.style = .RoundWith(lineWdith: 5, lineColor: UIColor.yellowColor())
+
+![circledemo](https://github.com/MillmanY/UploadImage/blob/master/Round.gif)
+
 
 ## Installation
 
