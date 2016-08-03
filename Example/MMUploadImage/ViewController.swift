@@ -83,6 +83,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             imgView.style = .CenterExpand
         case 2:
             imgView.style = .CenterShrink
+        case 3:
+            imgView.style = .RoundWith(lineWdith: 5, lineColor: UIColor.yellowColor())
         default:break
         }
     }

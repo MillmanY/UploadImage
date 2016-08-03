@@ -28,6 +28,7 @@ public enum LoadingStyle {
     case Sector
     case CenterExpand
     case CenterShrink
+    case RoundWith(lineWdith:CGFloat,lineColor:UIColor)
 }
 
 private var ProgressTimer = "TimerKey"
@@ -255,6 +256,7 @@ public extension UIImageView  {
             self.sectorLayer.mask?.frame = self.bounds
             self.sectorLayer.mask?.cornerRadius = radius
             self.backgroundLayer.hidden = true
+            self.backgroundLayer.path = nil
             if let c = completedBlock {
                 c()
             }
@@ -266,8 +268,9 @@ public extension UIImageView  {
             if let f = failBlock{
                 f()
             }
-
             self.backgroundLayer.hidden = true
+            self.backgroundLayer.path = nil
+
         } else {
             self.status = .None
         }
@@ -291,7 +294,10 @@ public extension UIImageView  {
         }
         
         dispatch_async(dispatch_get_main_queue()) {
-            self.backgroundLayer.hidden = (progress > 0.0) ? false : true
+            if self.status != .WillFailed {
+                self.backgroundLayer.hidden = (progress > 0.0) ? false : true
+            }
+            
             self.backgroundLayer.frame = self.bounds
             self.sectorLayer.contents = image.CGImage
             self.sectorLayer.frame = self.layerFrame()
@@ -346,6 +352,8 @@ public extension UIImageView  {
         switch self.style {
         case .Sector:
             return CGRectInset(self.bounds, 10, 10)
+        case .RoundWith(let lineWdith, let lineColor):
+            return CGRectInset(self.bounds, lineWdith/2, lineWdith/2)
         default:
             return self.bounds
         }
@@ -363,45 +371,68 @@ extension UIImageView {
         animation.setValue("StrokeProgress", forKey: "animationID")
         animation.fromValue = self.animationFromValue()
         animation.toValue = self.animationToValue(progress)
+        animation.fillMode = kCAFillModeBoth
+
         switch self.style {
             case .Sector:
                 animation.keyPath = "strokeEnd"
+                self.sectorLayer.mask = self.generateMask(nil)
+                self.sectorLayer.mask!.addAnimation(animation, forKey: "Stroke")
             case .CenterExpand:
                 animation.keyPath = "transform.scale"
+                self.sectorLayer.mask = self.generateMask(nil)
+                self.sectorLayer.mask!.addAnimation(animation, forKey: "Stroke")
             case .CenterShrink:
                 animation.keyPath = "lineWidth"
+                self.sectorLayer.mask = self.generateMask(nil)
+                self.sectorLayer.mask!.addAnimation(animation, forKey: "Stroke")
+            case .RoundWith(let lineWidth, let color):
+                animation.keyPath = "strokeEnd"
+                let resetPro:Float = (self.status == .WillFailed) ? 0.0 : 1.0
+                self.sectorLayer.mask = self.generateMask(resetPro)
+                let radius = CGRectGetWidth(backgroundLayer.frame)/2
+                let bezier = UIBezierPath(roundedRect: backgroundLayer.bounds, cornerRadius:radius)
+                self.backgroundLayer.lineWidth = lineWidth
+                self.backgroundLayer.path = bezier.CGPath
+                self.backgroundLayer.strokeColor = self.maskStrokeColor()
+                self.backgroundLayer.fillColor = self.maskFillColor()
+                self.backgroundLayer.addAnimation(animation, forKey: "Stroke")
         }
-        animation.fillMode = kCAFillModeBoth
-        self.sectorLayer.mask = self.generateMask(progress)
-        self.sectorLayer.mask!.addAnimation(animation, forKey: "Stroke")
         self.lastProgress = progress
     }
     
     private func animationFromValue() -> AnyObject? {
         switch self.style {
-        case .Sector,.CenterExpand:
-            return self.lastProgress
-        case .CenterShrink:
-            let radius = CGRectGetWidth(sectorLayer.frame)/2
-            return self.lastProgress * Float(radius*2)
+            case .Sector,.CenterExpand:
+                return self.lastProgress
+            case .CenterShrink:
+                let radius = CGRectGetWidth(sectorLayer.frame)/2
+                return self.lastProgress * Float(radius*2)
+            case .RoundWith(let lineWidth, let color):
+                return self.lastProgress
         }
     }
     
     private func animationToValue(progress:Float) -> AnyObject? {
         let progressValue = (self.status == .WillFailed) ? 0 : (progress <= 1.0) ? progress : 1.0
         switch self.style {
-        case .Sector,.CenterExpand:
-            return progressValue
-        case .CenterShrink:
-            let radius = CGRectGetWidth(sectorLayer.frame)/2
-             return progressValue * Float(radius*2)
+            case .Sector,.CenterExpand:
+                return progressValue
+            case .CenterShrink:
+                let radius = CGRectGetWidth(sectorLayer.frame)/2
+                return progressValue * Float(radius*2)
+            case .RoundWith(let lineWidth, let color):
+                return progressValue
         }
     }
     
-    private func generateMask(progress:Float) -> CAShapeLayer {
+    private func generateMask(progress:Float?) -> CAShapeLayer {
         let radius = CGRectGetWidth(sectorLayer.frame)/2
         let bezier = UIBezierPath(roundedRect: sectorLayer.bounds, cornerRadius:radius)
         let maskLayer = CAShapeLayer()
+        if let p = progress {
+            maskLayer.strokeEnd = CGFloat(p)
+        }
         maskLayer.frame = sectorLayer.bounds
         maskLayer.cornerRadius = radius
         maskLayer.path = bezier.CGPath
@@ -414,36 +445,37 @@ extension UIImageView {
     
     private func maskStrokeColor () -> CGColor {
         switch self.style {
-            case .Sector:
+            case .Sector,.CenterShrink:
                 return UIColor.blueColor().CGColor
             case .CenterExpand:
                 return UIColor.clearColor().CGColor
-            case .CenterShrink:
-                return UIColor.blueColor().CGColor
+            case .RoundWith(let lineWidth, let color):
+                return color.CGColor
         }
     }
     
     private func maskFillColor () -> CGColor {
         switch self.style {
-            case .Sector:
-                return UIColor.clearColor().CGColor
             case .CenterExpand:
                 return UIColor.blueColor().CGColor
-            case .CenterShrink:
+            default:
                 return UIColor.clearColor().CGColor
         }
     }
     
     private func animationProgress () -> Float {
         var value:CGFloat = 0.0
-        if let layer = self.sectorLayer.mask?.presentationLayer() as? CAShapeLayer {
+        if let layer = self.sectorLayer.mask?.presentationLayer() as? CAShapeLayer ,
+           let background = self.backgroundLayer.presentationLayer() as? CAShapeLayer{
             switch self.style {
-            case .Sector:
-                value = layer.strokeEnd
-            case .CenterExpand:
-                value = layer.transform.m22
-            case .CenterShrink:
-                value = layer.lineWidth/100.0
+                case .Sector:
+                    value = layer.strokeEnd
+                case .CenterExpand:
+                    value = layer.transform.m22
+                case .CenterShrink:
+                    value = layer.lineWidth/100.0
+                case .RoundWith(let lineWidth, let color):
+                    value = background.strokeEnd
             }
             
             let floatStr = NSString.init(format: "%0.3f", value)

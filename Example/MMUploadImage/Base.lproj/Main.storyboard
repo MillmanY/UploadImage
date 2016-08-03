@@ -86,8 +86,9 @@
                                 </constraints>
                                 <segments>
                                     <segment title="Sector"/>
-                                    <segment title="CenterExpand"/>
-                                    <segment title="CenterShrink"/>
+                                    <segment title="Expand"/>
+                                    <segment title="Shrink"/>
+                                    <segment title="Round"/>
                                 </segments>
                                 <variation key="default">
                                     <mask key="constraints">
