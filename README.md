@@ -10,7 +10,7 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
-It's an Extension helper for UIImageView to Upload a image when post to server
+It's an Extension helper for UIImageView to Upload an image when post to server
 
 1.Set progress and image
 
