@@ -63,7 +63,6 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         self.imgView.uploadCompleted()
     }
 
-    
     @IBAction func selectImageAction () {
         let picker = UIImagePickerController()
         picker.delegate = self
