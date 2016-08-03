@@ -407,7 +407,7 @@ extension UIImageView {
             case .CenterShrink:
                 let radius = CGRectGetWidth(sectorLayer.frame)/2
                 return self.lastProgress * Float(radius*2)
-            case .RoundWith(let lineWidth, let color):
+            case .RoundWith(_, _):
                 return self.lastProgress
         }
     }
