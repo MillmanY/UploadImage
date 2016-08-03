@@ -352,7 +352,7 @@ public extension UIImageView  {
         switch self.style {
         case .Sector:
             return CGRectInset(self.bounds, 10, 10)
-        case .RoundWith(let lineWdith, let lineColor):
+        case .RoundWith(let lineWdith, _):
             return CGRectInset(self.bounds, lineWdith/2, lineWdith/2)
         default:
             return self.bounds
@@ -386,7 +386,7 @@ extension UIImageView {
                 animation.keyPath = "lineWidth"
                 self.sectorLayer.mask = self.generateMask(nil)
                 self.sectorLayer.mask!.addAnimation(animation, forKey: "Stroke")
-            case .RoundWith(let lineWidth, let color):
+            case .RoundWith(let lineWidth, _):
                 animation.keyPath = "strokeEnd"
                 let resetPro:Float = (self.status == .WillFailed) ? 0.0 : 1.0
                 self.sectorLayer.mask = self.generateMask(resetPro)
@@ -421,7 +421,7 @@ extension UIImageView {
             case .CenterShrink:
                 let radius = CGRectGetWidth(sectorLayer.frame)/2
                 return progressValue * Float(radius*2)
-            case .RoundWith(let lineWidth, let color):
+            case .RoundWith(_, _):
                 return progressValue
         }
     }
@@ -449,7 +449,7 @@ extension UIImageView {
                 return UIColor.blueColor().CGColor
             case .CenterExpand:
                 return UIColor.clearColor().CGColor
-            case .RoundWith(let lineWidth, let color):
+            case .RoundWith(_, let color):
                 return color.CGColor
         }
     }
@@ -474,7 +474,7 @@ extension UIImageView {
                     value = layer.transform.m22
                 case .CenterShrink:
                     value = layer.lineWidth/100.0
-                case .RoundWith(let lineWidth, let color):
+                case .RoundWith(_, _):
                     value = background.strokeEnd
             }
             
