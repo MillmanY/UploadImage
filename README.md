@@ -41,6 +41,7 @@ It's an Extension helper for UIImageView to Upload a image when post to server
      case Sector
      case CenterExpand
      case CenterShrink
+     case RoundWith(lineWdith:CGFloat,lineColor:UIColor)
     }
     
     imgView.style = .Sector
