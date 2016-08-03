@@ -5,7 +5,6 @@
 //  Created by MILLMAN on 2016/7/14.
 //  Copyright © 2016年 MILLMAN. All rights reserved.
 //
-
 import UIKit
 public final class Associated<T>: NSObject {
     public typealias Type = T
