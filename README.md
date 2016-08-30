@@ -18,11 +18,13 @@ It's an Extension helper for UIImageView to Upload an image when post to server
   
 2.Set Upload completed With function
 
-    imgView.uploadCompleted()
+    1.imgView.uploadCompleted(2.0) // Duration
+    2.imgView.uploadCompleted() // Default Duration 0.3
   
 3.Set Upload failed with function
 
-    self.imgView.uploadImageFail()
+    1.self.imgView.uploadImageFail(2.0) // Duration
+    2.self.imgView.uploadImageFail() // Default Duration 0.3
         
 4.Upload Completed block
 
