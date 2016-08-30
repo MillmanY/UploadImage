@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MMUploadImage'
-  s.version          = '0.3.6'
+  s.version          = '0.5.0'
   s.summary          = 'MMUploadImage'
 
 # This description is used to generate tags and improve search results.
