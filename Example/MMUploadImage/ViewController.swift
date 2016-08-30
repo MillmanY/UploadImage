@@ -30,6 +30,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     }
     
     func reset() {
+        
         self.imgView.uploadImage(selectImage, progress: progress)
         if(progress <= 1.0) {
             self.performSelector("reset", withObject: nil, afterDelay: 0.3)

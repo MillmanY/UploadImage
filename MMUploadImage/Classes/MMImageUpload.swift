@@ -41,6 +41,7 @@ private var FailBlock = "FailKey"
 private var UploadKey = "UploadKey"
 private var StyleKey  = "StyleKey"
 private var CurrentProgress = "CurrentProgressKey"
+private let DefaultDuration = 0.3
 
 public extension UIImageView {
     
@@ -286,6 +287,10 @@ public extension UIImageView  {
     }
     
     public func uploadImage(image:UIImage,progress:Float) {
+        self.uploadImage(image, progress: progress, duration: DefaultDuration)
+    }
+    
+    private func uploadImage(image:UIImage,progress:Float,duration:CFTimeInterval) {
         self.uploadImage = image
         
         if self.status == .Uploading && progress < 1.0 || self.status == .Completed  && progress == 1.0{
@@ -303,11 +308,15 @@ public extension UIImageView  {
             let radius = CGRectGetWidth(self.sectorLayer.frame)/2
             self.sectorLayer.cornerRadius = radius
             self.sectorLayer.masksToBounds = true
-            self.addAnimationWith(progress)
+            self.addAnimationWith(progress,duration: duration)
         }
     }
     
     public func uploadImageFail() {
+        self.uploadImageFail(DefaultDuration)
+    }
+    
+    public func uploadImageFail(duration:CFTimeInterval) {
         
         if self.status == .Completed || self.status == .Failed {
             return
@@ -319,7 +328,7 @@ public extension UIImageView  {
             self.lastProgress = (self.lastProgress <= 1.0) ? self.lastProgress : 1.0
             
             if let i = self.uploadImage {
-                self.uploadImage(i, progress:0.0)
+                self.uploadImage(i, progress:0.0,duration: duration)
             } else {
                 self.status = .None
                 print("Not set Upload Image")
@@ -334,13 +343,17 @@ public extension UIImageView  {
     }
     
     public func uploadCompleted() {
+        self.uploadCompleted(DefaultDuration)
+    }
+    
+    public func uploadCompleted(duration:CFTimeInterval) {
         if self.status == .Completed {
             return
         }
         
         if let i = self.uploadImage {
             self.status = .WillCompleted
-            self.uploadImage(i, progress:1.0)
+            self.uploadImage(i, progress:1.0,duration: duration)
         } else {
             self.status = .None
             print("not set Upload Image")
@@ -361,11 +374,11 @@ public extension UIImageView  {
 
 // Animation
 extension UIImageView {
-    private func addAnimationWith(progress:Float) {
+    private func addAnimationWith(progress:Float,duration:CFTimeInterval) {
         
         let animation = CABasicAnimation()
         animation.delegate = self
-        animation.duration = 0.3
+        animation.duration = duration
         animation.removedOnCompletion = false
         animation.setValue("StrokeProgress", forKey: "animationID")
         animation.fromValue = self.animationFromValue()
