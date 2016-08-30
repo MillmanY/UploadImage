@@ -23,8 +23,8 @@ It's an Extension helper for UIImageView to Upload an image when post to server
   
 3.Set Upload failed with function
 
-    1.self.imgView.uploadImageFail(2.0) // Duration
-    2.self.imgView.uploadImageFail() // Default Duration 0.3
+    1.imgView.uploadImageFail(2.0) // Duration
+    2.imgView.uploadImageFail() // Default Duration 0.3
         
 4.Upload Completed block
 
