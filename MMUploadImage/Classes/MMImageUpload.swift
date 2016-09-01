@@ -328,7 +328,7 @@ public extension UIImageView  {
     }
     
     private func uploadImage(image:UIImage,progress:Float,duration:CFTimeInterval) {
-        var fixProgress = (progress > 1.0) ? 1.0 : progress
+        let fixProgress = (progress > 1.0) ? 1.0 : progress
         
         self.uploadImage = image
         if self.status == .Uploading && fixProgress < 1.0 || self.status == .Completed  && fixProgress == 1.0{
