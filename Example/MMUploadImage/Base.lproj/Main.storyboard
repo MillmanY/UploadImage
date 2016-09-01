@@ -77,8 +77,8 @@
                                     <action selector="selectImageAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="aHO-nn-fII"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3V4-Ll-IX2">
-                                <rect key="frame" x="150.5" y="427" width="300" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3V4-Ll-IX2">
+                                <rect key="frame" x="151" y="427" width="300" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="BfD-6T-CqK"/>
                                     <constraint firstAttribute="width" constant="303" id="bSk-qq-xbP"/>
@@ -89,6 +89,7 @@
                                     <segment title="Expand"/>
                                     <segment title="Shrink"/>
                                     <segment title="Round"/>
+                                    <segment title="wave"/>
                                 </segments>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -99,8 +100,8 @@
                                     <action selector="segmentAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="gjC-LQ-lIC"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Style:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6MP-Tx-6Gq">
-                                <rect key="frame" x="200" y="395" width="201.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Loading Style:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6MP-Tx-6Gq">
+                                <rect key="frame" x="200" y="395" width="202" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="201.5" id="D9I-eF-Fl8"/>
                                     <constraint firstAttribute="width" constant="104" id="xV9-wL-dDy"/>

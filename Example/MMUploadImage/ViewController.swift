@@ -85,6 +85,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             imgView.style = .CenterShrink
         case 3:
             imgView.style = .RoundWith(lineWdith: 5, lineColor: UIColor.yellowColor())
+        case 4:
+            imgView.style = .Wave
         default:break
         }
     }
