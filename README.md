@@ -40,10 +40,11 @@ It's an Extension helper for UIImageView to Upload an image when post to server
 6.Set Progress Style
 
     public enum LoadingStyle {
-     case Sector
-     case CenterExpand
-     case CenterShrink
-     case RoundWith(lineWdith:CGFloat,lineColor:UIColor)
+      case Sector
+      case CenterExpand
+      case CenterShrink
+      case RoundWith(lineWdith:CGFloat,lineColor:UIColor)
+      case Wave
     }
     
 
