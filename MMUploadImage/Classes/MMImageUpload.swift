@@ -449,15 +449,12 @@ extension UIImageView {
                 self.backgroundLayer.addAnimation(animation, forKey: "Round")
             case .Wave:
                 animation.keyPath = "transform.translation.y"
-                
                 if waveTimer == nil {
                     self.sectorLayer.mask = self.generateMask(nil)
-
                     waveTimer =  NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(UIImageView.reDrawWave(_:)), userInfo: nil, repeats: true)
                 }
        
                 self.sectorLayer.mask!.addAnimation(animation, forKey: "Wave")
-
         }
         self.lastProgress = progress
     }
@@ -528,20 +525,16 @@ extension UIImageView {
         switch self.style {
             case .Sector,.CenterShrink:
                 return UIColor.blueColor().CGColor
-            case .CenterExpand:
+            case .CenterExpand,.Wave:
                 return UIColor.clearColor().CGColor
             case .RoundWith(_, let color):
                 return color.CGColor
-            case .Wave:
-                return UIColor.clearColor().CGColor
         }
     }
     
     private func maskFillColor () -> CGColor {
         switch self.style {
-            case .CenterExpand:
-                return UIColor.blueColor().CGColor
-            case .Wave:
+            case .CenterExpand,.Wave:
                 return UIColor.blueColor().CGColor
             default:
                 return UIColor.clearColor().CGColor
