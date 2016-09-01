@@ -500,7 +500,7 @@ extension UIImageView {
     }
     
     private func generateMask(progress:Float?) -> CAShapeLayer {
-        var radius:CGFloat = CGRectGetWidth(sectorLayer.frame)/2
+        let radius:CGFloat = CGRectGetWidth(sectorLayer.frame)/2
         let bezier = UIBezierPath(roundedRect: sectorLayer.bounds, cornerRadius:radius)
         let maskLayer = CAShapeLayer()
         if let p = progress {
