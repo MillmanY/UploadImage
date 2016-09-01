@@ -30,6 +30,7 @@ public enum LoadingStyle {
     case RoundWith(lineWdith:CGFloat,lineColor:UIColor)
     case Wave
 }
+
 private var WaveObjectKey = "WaveObjectKey"
 private var WaveTimer = "WaveKey"
 private var ProgressTimer = "TimerKey"
@@ -49,17 +50,13 @@ public extension UIImageView {
     
     private var waveObject:WaveObject {
         set {
-    
             objc_setAssociatedObject(self, &WaveObjectKey, newValue, .OBJC_ASSOCIATION_RETAIN)
-            
         } get {
             if let wave = objc_getAssociatedObject(self, &WaveObjectKey) as? WaveObject {
                 return wave
             } else {
-                let width = CGRectGetWidth(self.sectorLayer.frame)
-                let wave = WaveObject.init(layerWidth: Double(width))
+                let wave = WaveObject.init(layerSize: self.sectorLayer.frame.size,speed: 3.0)
                 self.waveObject = wave
-                self.waveObject.speed = 5.0
                 return wave
             }
         }
@@ -73,7 +70,6 @@ public extension UIImageView {
                newValue != currentProgress &&
                 !(currentProgress == 1.0 || currentProgress == 0.0){
             }
-  
             objc_setAssociatedObject(self, &CurrentProgress, newValue, .OBJC_ASSOCIATION_RETAIN)
             
         } get {
@@ -316,7 +312,10 @@ public extension UIImageView  {
     
     public override func animationDidStart(anim: CAAnimation) {
         if progressTimer == nil {
-            progressTimer =  NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(UIImageView.animationDoing(_:)), userInfo: nil, repeats: true)
+            progressTimer = NSTimer.init(timeInterval: 0.01, target: self, selector: #selector(UIImageView.animationDoing(_:)), userInfo: nil, repeats: true)
+            if let pTimer = progressTimer {
+                NSRunLoop.mainRunLoop().addTimer(pTimer, forMode: NSRunLoopCommonModes)
+            }
         }
         
         if (self.status != .WillFailed && self.status != .WillCompleted) {
@@ -329,9 +328,10 @@ public extension UIImageView  {
     }
     
     private func uploadImage(image:UIImage,progress:Float,duration:CFTimeInterval) {
-        self.uploadImage = image
+        var fixProgress = (progress > 1.0) ? 1.0 : progress
         
-        if self.status == .Uploading && progress < 1.0 || self.status == .Completed  && progress == 1.0{
+        self.uploadImage = image
+        if self.status == .Uploading && fixProgress < 1.0 || self.status == .Completed  && fixProgress == 1.0{
             return
         }
         
@@ -346,7 +346,7 @@ public extension UIImageView  {
             let radius = CGRectGetWidth(self.sectorLayer.frame)/2
             self.sectorLayer.cornerRadius = radius
             self.sectorLayer.masksToBounds = true
-            self.addAnimationWith(progress,duration: duration)
+            self.addAnimationWith(fixProgress,duration: duration)
         }
     }
     
@@ -451,7 +451,10 @@ extension UIImageView {
                 animation.keyPath = "transform.translation.y"
                 if waveTimer == nil {
                     self.sectorLayer.mask = self.generateMask(nil)
-                    waveTimer =  NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(UIImageView.reDrawWave(_:)), userInfo: nil, repeats: true)
+                    waveTimer = NSTimer.init(timeInterval: 0.05, target: self, selector: #selector(UIImageView.reDrawWave(_:)), userInfo: nil, repeats: true)
+                    if let wTimer = waveTimer {
+                        NSRunLoop.mainRunLoop().addTimer(wTimer, forMode: NSRunLoopCommonModes)
+                    }
                 }
        
                 self.sectorLayer.mask!.addAnimation(animation, forKey: "Wave")
@@ -497,16 +500,8 @@ extension UIImageView {
     }
     
     private func generateMask(progress:Float?) -> CAShapeLayer {
-        var radius:CGFloat = 0.0
-        switch self.style {
-            case .Wave:
-                radius = 0.0
-            default:
-                radius = CGRectGetWidth(sectorLayer.frame)/2
-        }
-        
+        var radius:CGFloat = CGRectGetWidth(sectorLayer.frame)/2
         let bezier = UIBezierPath(roundedRect: sectorLayer.bounds, cornerRadius:radius)
-
         let maskLayer = CAShapeLayer()
         if let p = progress {
             maskLayer.strokeEnd = CGFloat(p)
