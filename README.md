@@ -59,6 +59,19 @@ It's an Extension helper for UIImageView to Upload an image when post to server
     imgView.style = .Wave
 ![circledemo](https://github.com/MillmanY/UploadImage/blob/master/wave.gif)
 
+
+Convenience for Button Extension
+
+    public func uploadImage(image: UIImage, progress: Float)
+    public func uploadImageFail()
+    public func uploadImageFail(duration: CFTimeInterval)
+    public func uploadCompleted()
+    public func uploadCompleted(duration: CFTimeInterval)
+    public func completedBlock(completed: (() -> Void)?)
+    public func failedBlock(completed: (() -> Void)?)
+    public func setStyle(style: MMUploadImage.LoadingStyle)
+    public func setAutoCompleted(isAuto: Bool)
+
 ## Installation
 
 MMUploadImage is available through [CocoaPods](http://cocoapods.org). To install
