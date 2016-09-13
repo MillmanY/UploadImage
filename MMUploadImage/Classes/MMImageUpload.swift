@@ -217,6 +217,7 @@ public extension UIImageView {
                 self.layer.cornerRadius = self.frame.size.width/2
                 self.clipsToBounds = true
                 self.sectorLayer = CAShapeLayer()
+                self.sectorLayer.masksToBounds = true
                 self.layer.addSublayer(self.sectorLayer)
                 return self.sectorLayer
             }
@@ -234,7 +235,7 @@ public extension UIImageView {
         }
     }
     
-    private var uploadImage:UIImage? {
+    var uploadImage:UIImage? {
         set {
             objc_setAssociatedObject(self, &UploadImage, newValue, .OBJC_ASSOCIATION_RETAIN)
             
@@ -340,12 +341,12 @@ public extension UIImageView  {
                 self.backgroundLayer.hidden = (progress > 0.0) ? false : true
             }
             
+            let view = UIImageView.init(frame: self.bounds)
             self.backgroundLayer.frame = self.bounds
             self.sectorLayer.contents = image.CGImage
             self.sectorLayer.frame = self.layerFrame()
             let radius = CGRectGetWidth(self.sectorLayer.frame)/2
             self.sectorLayer.cornerRadius = radius
-            self.sectorLayer.masksToBounds = true
             self.addAnimationWith(fixProgress,duration: duration)
         }
     }

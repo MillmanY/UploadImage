@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		279DB7FF1D8706AD00D912DA /* ButtonExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279DB7FE1D8706AD00D912DA /* ButtonExtenstion.swift */; };
 		27A36E391D77EAA500933AB2 /* WaveObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A36E381D77EAA500933AB2 /* WaveObject.swift */; };
 		717611843141DAB61F5B58A4DE74E24D /* Pods-MMUploadImage_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BD20BAA2510222643C237D46A8411C /* Pods-MMUploadImage_Example-dummy.m */; };
 		9464217081274DCBA7E4EF20F28BD1DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		066280FA63A638971381EAB9A7C2517F /* MMImageUpload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MMImageUpload.swift; sourceTree = "<group>"; };
 		237F9C681513A0A580C85B9BBE6DD926 /* Pods-MMUploadImage_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MMUploadImage_Example.release.xcconfig"; sourceTree = "<group>"; };
+		279DB7FE1D8706AD00D912DA /* ButtonExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonExtenstion.swift; sourceTree = "<group>"; };
 		27A36E381D77EAA500933AB2 /* WaveObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveObject.swift; sourceTree = "<group>"; };
 		36D490A7386BFB404C9229E2D65AFA55 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		378ED644FA44BD2D76059F7217B8449E /* MMUploadImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MMUploadImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +144,7 @@
 			children = (
 				066280FA63A638971381EAB9A7C2517F /* MMImageUpload.swift */,
 				27A36E381D77EAA500933AB2 /* WaveObject.swift */,
+				279DB7FE1D8706AD00D912DA /* ButtonExtenstion.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27A36E391D77EAA500933AB2 /* WaveObject.swift in Sources */,
+				279DB7FF1D8706AD00D912DA /* ButtonExtenstion.swift in Sources */,
 				C9B599FABAD888C5544EDF9E01F2707B /* MMImageUpload.swift in Sources */,
 				C824D869ADAFE294A3E12EB340527D9C /* MMUploadImage-dummy.m in Sources */,
 			);
