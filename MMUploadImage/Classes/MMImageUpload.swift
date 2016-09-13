@@ -340,8 +340,6 @@ public extension UIImageView  {
             if self.status != .WillFailed {
                 self.backgroundLayer.hidden = (progress > 0.0) ? false : true
             }
-            
-            let view = UIImageView.init(frame: self.bounds)
             self.backgroundLayer.frame = self.bounds
             self.sectorLayer.contents = image.CGImage
             self.sectorLayer.frame = self.layerFrame()
