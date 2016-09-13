@@ -545,14 +545,14 @@ extension UIImageView {
                 case .CenterExpand:
                     value = layer.transform.m22
                 case .CenterShrink:
-                    value = layer.lineWidth/100.0
+                    value = layer.lineWidth/CGRectGetWidth(self.bounds)
                 case .RoundWith(_, _):
                     value = background.strokeEnd
                 case .Wave:
                     value = layer.frame.origin.y
             }
-            
             let floatStr = NSString.init(format: "%0.3f", value)
+            print (floatStr)
             return floatStr.floatValue
         } else {
             return 0.0
