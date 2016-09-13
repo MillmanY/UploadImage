@@ -60,7 +60,7 @@ It's an Extension helper for UIImageView to Upload an image when post to server
 ![circledemo](https://github.com/MillmanY/UploadImage/blob/master/wave.gif)
 
 
-Convenience for Button Extension
+Convenience for Button Image Extension
 
     public func uploadImage(image: UIImage, progress: Float)
     public func uploadImageFail()
