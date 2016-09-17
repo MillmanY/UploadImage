@@ -32,9 +32,9 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     }
     
     func reset() {
-        self.imgView.uploadImage(selectImage, progress: progress)
+        self.imgView.uploadImage(image:selectImage, progress: progress)
         if(progress <= 1.0) {
-            self.performSelector("reset", withObject: nil, afterDelay: 0.3)
+            self.perform(#selector(ViewController.reset), with: nil, afterDelay: 0.3)
         }
         progress += 0.1
 
@@ -58,7 +58,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     @IBAction func addAction() {
         progress = (progress + 0.14 <= 1.0) ? progress + 0.14 : 1.0
-        self.imgView.uploadImage(selectImage, progress: progress)
+        self.imgView.uploadImage(image:selectImage, progress: progress)
     }
     
     @IBAction func completedAction () {
@@ -69,36 +69,36 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
-        picker.sourceType = .PhotoLibrary
-        picker.videoQuality = .TypeLow;
-        self.presentViewController(picker, animated: true, completion: nil)
+        picker.sourceType = .photoLibrary
+        picker.videoQuality = .typeLow;
+        self.present(picker, animated: true, completion: nil)
     }
     
-    @IBAction func segmentAction(segment:UISegmentedControl) {
+    @IBAction func segmentAction(_ segment:UISegmentedControl) {
         progress = 0.0
         self.imgView.uploadImageFail()
         switch segment.selectedSegmentIndex {
         case 0:
-            imgView.style = .Sector
+            imgView.style = .sector
         case 1:
-            imgView.style = .CenterExpand
+            imgView.style = .centerExpand
         case 2:
-            imgView.style = .CenterShrink
+            imgView.style = .centerShrink
         case 3:
-            imgView.style = .RoundWith(lineWdith: 5, lineColor: UIColor.yellowColor())
+            imgView.style = .roundWith(lineWdith: 5, lineColor: UIColor.yellow)
         case 4:
-            imgView.style = .Wave
+            imgView.style = .wave
         default:break
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if  let img = info[UIImagePickerControllerEditedImage] as? UIImage {
             self.progress = 0.1
             self.selectImage = img
-            self.imgView.uploadImage(selectImage, progress: progress)
+            self.imgView.uploadImage(image:selectImage, progress: progress)
         }
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

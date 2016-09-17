@@ -9,36 +9,36 @@
 import UIKit
 
 class WaveObject: NSObject {
-    private var speed:Float = 0.0
-    private var a = 0.0
-    private var offset:Float = 0.0
-    private var waveWidth = 0.0
-    private var toAdd = true
-    private var layerSize:CGSize = CGSizeZero
+    fileprivate var speed:Float = 0.0
+    fileprivate var a = 0.0
+    fileprivate var offset:Float = 0.0
+    fileprivate var waveWidth = 0.0
+    fileprivate var toAdd = true
+    fileprivate var layerSize:CGSize = CGSize.zero
     
     init (layerSize:CGSize,speed:Float) {
         self.layerSize = layerSize
         self.speed = speed
     }
     
-    func generateWavePath(yPos:CGFloat) -> CGPath {
+    func generateWavePath(_ yPos:CGFloat) -> CGPath {
         a = (toAdd) ? a + 0.01 : a - 0.01
         toAdd = (a <= 1 ) ? true : (a >= 2.5) ? false : toAdd
         offset = (offset < MAXFLOAT) ? offset + speed : offset - speed
         let bezier = UIBezierPath()
         
         bezier.lineWidth = 1
-        bezier.moveToPoint(CGPointMake(0, yPos))
+        bezier.move(to: CGPoint(x: 0, y: yPos))
         
         let width = Double(layerSize.width)
         for x in 0..<Int(layerSize.width) {
             let y = 2 * a * sin (2.5 * M_PI / width * Double(x) + Double(offset) * M_PI / width) + Double(yPos)
-            bezier.addLineToPoint(CGPointMake(CGFloat(x), CGFloat(y)))
+            bezier.addLine(to: CGPoint(x: CGFloat(x), y: CGFloat(y)))
         }
-        bezier.addLineToPoint(CGPointMake(layerSize.width, layerSize.height))
-        bezier.addLineToPoint(CGPointMake(0, layerSize.height))
-        bezier.closePath()
+        bezier.addLine(to: CGPoint(x: layerSize.width, y: layerSize.height))
+        bezier.addLine(to: CGPoint(x: 0, y: layerSize.height))
+        bezier.close()
         
-        return bezier.CGPath
+        return bezier.cgPath
     }
 }

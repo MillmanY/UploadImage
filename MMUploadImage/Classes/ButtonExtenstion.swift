@@ -9,27 +9,24 @@ import UIKit
 private var OriginalSize = "OriginalSizeKey"
 public extension UIButton {
     
-    private var originalSize:CGSize {
+    fileprivate var originalSize:CGSize {
         get {
-            if let size = objc_getAssociatedObject(self,&OriginalSize) as? Associated<CGSize> {
-                return size.value
+            if let size = objc_getAssociatedObject(self,&OriginalSize) as? CGSize {
+                return size
             } else {
-                let size = CGSizeZero
+                let size = CGSize.zero
                 self.originalSize = size
                 return size
             }
         }
         set {
-            objc_setAssociatedObject(self,
-                                     &OriginalSize,
-                                     Associated<CGSize>(newValue),
-                                     .OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self,&OriginalSize,newValue,.OBJC_ASSOCIATION_RETAIN)
         }
     }
-  
+    
     public func uploadImage(image: UIImage, progress: Float) {
         self.setImageSize()
-        self.imageView?.uploadImage(image, progress: progress)
+        self.imageView?.uploadImage(image:image, progress: progress)
     }
     
     public func uploadImageFail() {
@@ -37,7 +34,7 @@ public extension UIButton {
     }
     
     public func uploadImageFail(duration: CFTimeInterval) {
-        self.imageView?.uploadImageFail(duration)
+        self.imageView?.uploadImageFail(duration: duration)
     }
     
     public func uploadCompleted() {
@@ -45,14 +42,14 @@ public extension UIButton {
     }
     
     public func uploadCompleted(duration: CFTimeInterval) {
-        self.imageView?.uploadCompleted(duration)
+        self.imageView?.uploadCompleted(duration: duration)
     }
     
     public func completedBlock(completed:(()-> Void)?) {
         
         self.imageView?.completedBlock = {
             if let c = completed {
-                self.setImage(self.reDrawImage(), forState: .Normal)
+                self.setImage(self.reDrawImage(), for: .normal)
                 c()
             }
         }
@@ -70,19 +67,19 @@ public extension UIButton {
         self.imageView?.autoCompleted = isAuto
     }
     
-    private func reDrawImage() -> UIImage {
-        var frame = CGRectZero
+    fileprivate func reDrawImage() -> UIImage {
+        var frame = CGRect.zero
         frame.size = self.originalSize
         UIGraphicsBeginImageContext(self.originalSize)
-        self.imageView?.uploadImage!.drawInRect(frame)
+        self.imageView?.uploadImage!.draw(in: frame)
         let resize = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return resize
+        return resize!
     }
     
-    private func setImageSize() {
+    fileprivate func setImageSize() {
         if let size = self.imageView?.frame.size
-            where self.originalSize == CGSizeZero {
+            , self.originalSize == CGSize.zero {
             self.originalSize = size
         }
     }
