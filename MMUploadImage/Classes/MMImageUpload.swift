@@ -549,10 +549,9 @@ extension UIImageView {
                 case .RoundWith(_, _):
                     value = background.strokeEnd
                 case .Wave:
-                    value = layer.frame.origin.y
+                    value = (layer.frame.height - layer.frame.origin.y)/layer.frame.height
             }
             let floatStr = NSString.init(format: "%0.3f", value)
-            print (floatStr)
             return floatStr.floatValue
         } else {
             return 0.0

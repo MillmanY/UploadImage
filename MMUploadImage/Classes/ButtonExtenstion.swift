@@ -8,6 +8,7 @@
 import UIKit
 private var OriginalSize = "OriginalSizeKey"
 public extension UIButton {
+    
     private var originalSize:CGSize {
         get {
             if let size = objc_getAssociatedObject(self,&OriginalSize) as? Associated<CGSize> {
@@ -24,7 +25,6 @@ public extension UIButton {
                                      Associated<CGSize>(newValue),
                                      .OBJC_ASSOCIATION_RETAIN)
         }
-        
     }
   
     public func uploadImage(image: UIImage, progress: Float) {
