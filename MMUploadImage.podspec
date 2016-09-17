@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MMUploadImage'
-  s.version          = '2.0.1'
+  s.version          = '2.0.2'
   s.summary          = 'MMUploadImage'
 
 # This description is used to generate tags and improve search results.
@@ -35,6 +35,8 @@ Pod::Spec.new do |s|
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'UIKit'
+  s.requires_arc = true
+
   # s.dependency 'AFNetworking', '~> 2.3'
 end
