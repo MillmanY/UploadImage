@@ -1,6 +1,6 @@
 import UIKit
 import XCTest
-import MMUploadImage
+//import MMUploadImage
 
 class Tests: XCTestCase {
     

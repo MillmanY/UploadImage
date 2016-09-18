@@ -1,9 +1,9 @@
 {
   "name": "MMUploadImage",
-  "version": "0.1.0",
-  "summary": "A short description of MMUploadImage.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/MMUploadImage",
+  "version": "2.0.2",
+  "summary": "MMUploadImage",
+  "description": "Its a Extension helper for UIImageView to Upload a image when post to server",
+  "homepage": "https://github.com/MillmanY/UploadImage",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,11 +12,13 @@
     "Millman": "millmanyang@gmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/MMUploadImage.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/MillmanY/UploadImage.git",
+    "tag": "2.0.2"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "MMUploadImage/Classes/**/*"
+  "source_files": "MMUploadImage/Classes/**/*",
+  "frameworks": "UIKit",
+  "requires_arc": true
 }
