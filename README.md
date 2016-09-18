@@ -78,7 +78,10 @@ MMUploadImage is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
+Swift 3
 pod 'MMUploadImage'
+Swift 2.2
+pod 'MMUploadImage', '~> 1.0'
 ```
 
 ## Author
