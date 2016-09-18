@@ -1,6 +1,6 @@
 {
   "name": "MMUploadImage",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "summary": "MMUploadImage",
   "description": "Its a Extension helper for UIImageView to Upload a image when post to server",
   "homepage": "https://github.com/MillmanY/UploadImage",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/MillmanY/UploadImage.git",
-    "tag": "2.0.2"
+    "tag": "2.0.4"
   },
   "platforms": {
     "ios": "8.0"

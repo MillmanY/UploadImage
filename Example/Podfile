@@ -3,11 +3,3 @@ use_frameworks!
 target 'MMUploadImage_Example' do
     pod 'MMUploadImage', :path => '../'
 end
-
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |configuration|
-            configuration.build_settings['SWIFT_VERSION'] = "3.0"
-        end
-    end
-end
