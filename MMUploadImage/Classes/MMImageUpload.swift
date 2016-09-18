@@ -109,7 +109,9 @@ public extension UIImageView {
             return nil
         }
         set {
-            objc_setAssociatedObject(self,&CompletedBlock,newValue as? Any,.OBJC_ASSOCIATION_RETAIN)
+            let new:Any = newValue
+
+            objc_setAssociatedObject(self,&CompletedBlock,new,.OBJC_ASSOCIATION_RETAIN)
         }
     }
     
@@ -121,7 +123,9 @@ public extension UIImageView {
             return nil
         }
         set {
-            objc_setAssociatedObject(self,&FailBlock,newValue as? Any,.OBJC_ASSOCIATION_RETAIN)
+            
+            let new:Any = newValue
+            objc_setAssociatedObject(self,&FailBlock,new as Any,.OBJC_ASSOCIATION_RETAIN)
         }
     }
     
@@ -437,12 +441,12 @@ extension UIImageView {
     fileprivate func animationFromValue() -> AnyObject? {
         switch self.style {
         case .sector,.centerExpand:
-            return self.lastProgress as? AnyObject
+            return self.lastProgress as AnyObject?
         case .centerShrink:
             let radius = sectorLayer.frame.width/2
-            return (self.lastProgress * Float(radius*2)) as? AnyObject
+            return (self.lastProgress * Float(radius*2)) as AnyObject?
         case .roundWith(_, _):
-            return self.lastProgress as? AnyObject
+            return self.lastProgress as AnyObject?
         case .wave:
             let height = Float(self.sectorLayer.frame.height)
             return NSNumber(value: (1-self.lastProgress) * height as Float)
