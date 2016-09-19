@@ -80,7 +80,7 @@ it, simply add the following line to your Podfile:
 ```ruby
 Swift 3
 pod 'MMUploadImage'
-Swift 2.2
+Swift 2.3
 pod 'MMUploadImage', '~> 1.0'
 ```
 
