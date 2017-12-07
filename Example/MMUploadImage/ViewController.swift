@@ -31,6 +31,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
     }
     
+    @objc
     func reset() {
         self.imgView.uploadImage(image:selectImage, progress: progress)
         if(progress <= 1.0) {
