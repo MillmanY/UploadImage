@@ -231,7 +231,7 @@ public extension UIImageView {
 
 public extension UIImageView  {
     
-    func animationDoing(timer:Timer) {
+    @objc func animationDoing(timer:Timer) {
         self.currentProgress = animationProgress()
     }
     
@@ -432,7 +432,7 @@ extension UIImageView {
         self.lastProgress = progress
     }
     
-    func reDrawWave(timer:Timer) {
+    @objc func reDrawWave(timer:Timer) {
         if let m = self.sectorLayer.mask as? CAShapeLayer{
             m.path = waveObject.generateWavePath(CGFloat(10))
         }
