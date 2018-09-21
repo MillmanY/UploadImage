@@ -32,7 +32,7 @@ class WaveObject: NSObject {
         
         let width = Double(layerSize.width)
         for x in 0..<Int(layerSize.width) {
-            let y = 2 * a * sin (2.5 * M_PI / width * Double(x) + Double(offset) * M_PI / width) + Double(yPos)
+            let y = 2 * a * sin (2.5 * .pi / width * Double(x) + Double(offset) * .pi / width) + Double(yPos)
             bezier.addLine(to: CGPoint(x: CGFloat(x), y: CGFloat(y)))
         }
         bezier.addLine(to: CGPoint(x: layerSize.width, y: layerSize.height))
