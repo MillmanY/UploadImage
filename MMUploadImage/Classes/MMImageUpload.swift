@@ -231,7 +231,7 @@ public extension UIImageView {
 
 public extension UIImageView  {
     
-    func animationDoing(timer:Timer) {
+    @objc func animationDoing(timer:Timer) {
         self.currentProgress = animationProgress()
     }
     
@@ -370,7 +370,7 @@ extension UIImageView:CAAnimationDelegate {
         if progressTimer == nil {
             progressTimer = Timer.init(timeInterval: 0.01, target: self, selector: #selector(UIImageView.animationDoing(timer:)), userInfo: nil, repeats: true)
             if let pTimer = progressTimer {
-                RunLoop.main.add(pTimer, forMode: RunLoopMode.commonModes)
+                RunLoop.main.add(pTimer, forMode: RunLoop.Mode.common)
             }
         }
         
@@ -391,7 +391,7 @@ extension UIImageView {
         animation.setValue("StrokeProgress", forKey: "animationID")
         animation.fromValue = self.animationFromValue()
         animation.toValue = self.animationToValue(progress: progress)
-        animation.fillMode = kCAFillModeBoth
+        animation.fillMode = CAMediaTimingFillMode.both
         
         switch self.style {
         case .sector:
@@ -423,7 +423,7 @@ extension UIImageView {
                 self.sectorLayer.mask = self.generateMask(progress: nil)
                 waveTimer = Timer.init(timeInterval: 0.05, target: self, selector: #selector(UIImageView.reDrawWave(timer:)), userInfo: nil, repeats: true)
                 if let wTimer = waveTimer {
-                    RunLoop.main.add(wTimer, forMode: RunLoopMode.commonModes)
+                    RunLoop.main.add(wTimer, forMode: RunLoop.Mode.common)
                 }
             }
             
@@ -432,7 +432,7 @@ extension UIImageView {
         self.lastProgress = progress
     }
     
-    func reDrawWave(timer:Timer) {
+    @objc func reDrawWave(timer:Timer) {
         if let m = self.sectorLayer.mask as? CAShapeLayer{
             m.path = waveObject.generateWavePath(CGFloat(10))
         }
