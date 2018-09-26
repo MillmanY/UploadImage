@@ -109,7 +109,7 @@ public extension UIImageView {
             return nil
         }
         set {
-            let new:Any = newValue
+            let new:Any = newValue as Any
 
             objc_setAssociatedObject(self,&CompletedBlock,new,.OBJC_ASSOCIATION_RETAIN)
         }
@@ -124,8 +124,8 @@ public extension UIImageView {
         }
         set {
             
-            let new:Any = newValue
-            objc_setAssociatedObject(self,&FailBlock,new as Any,.OBJC_ASSOCIATION_RETAIN)
+            let new:Any = newValue as Any
+            objc_setAssociatedObject(self,&FailBlock,new,.OBJC_ASSOCIATION_RETAIN)
         }
     }
     
